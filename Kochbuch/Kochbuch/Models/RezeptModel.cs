@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Kochbuch
 {
     public class RezeptModel
     {
-        public string titel;
-        public Schwierigkeit schwierigkeit;
-        public string autor;
-        public List<ZutatModel> zutaten;
-        public string beschreibung;
+        //[PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+        public string Titel { get; set; }
+        public schwierigkeit Schwierigkeit { get; set; }
+        public string Autor { get; set; }
+        public List<ZutatModel> Zutaten { get; set; }
+        public string Beschreibung { get; set; }
 
 
-        public enum Schwierigkeit
+        public enum schwierigkeit
         {
             Leicht,
             Mittel,

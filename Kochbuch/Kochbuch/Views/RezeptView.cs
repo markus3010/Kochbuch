@@ -21,7 +21,7 @@ namespace Kochbuch
 
             layout.Children.Add(new Label
             {
-                Text = rezept.titel,
+                Text = rezept.Titel,
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                 FontAttributes = FontAttributes.Bold,
                 HorizontalOptions = LayoutOptions.StartAndExpand
@@ -29,7 +29,7 @@ namespace Kochbuch
             layout.Children.Add(
                 new Label
                 {
-                    Text = "von " + rezept.autor,
+                    Text = "von " + rezept.Autor,
                     FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                     FontAttributes = FontAttributes.Italic,
                     HorizontalOptions = LayoutOptions.StartAndExpand
@@ -41,13 +41,13 @@ namespace Kochbuch
                 FontAttributes = FontAttributes.Bold,
                 HorizontalOptions = LayoutOptions.StartAndExpand
             });
-            foreach (ZutatModel zutat in rezept.zutaten)
+            foreach (ZutatModel zutat in rezept.Zutaten)
             {
                 layout.Children.Add(new ZutatView(zutat));
             }
             layout.Children.Add(new Label
             {
-                Text = "Schwierigkeit: " + rezept.schwierigkeit,
+                Text = "Schwierigkeit: " + rezept.Schwierigkeit,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 FontAttributes = FontAttributes.Bold
@@ -61,7 +61,7 @@ namespace Kochbuch
             });
             layout.Children.Add(new Label
             {
-                Text = rezept.beschreibung,
+                Text = rezept.Beschreibung,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label))
             });
