@@ -23,7 +23,7 @@ namespace Kochbuch
 
 
             Image logo = new Image();
-            logo.Source = ImageSource.FromFile("Mensch.png");
+            logo.Source = ImageSource.FromFile("Logo.png");
 
             Label willkommenLabel = new Label();
             willkommenLabel.Text = "MeiKochbuch! - Ihr Onlinekochbuch!";
@@ -32,10 +32,12 @@ namespace Kochbuch
             willkommenLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
             Label tagLabel = new Label();
-            tagLabel.Text = "Rezedesages";
+            tagLabel.Text = "Rezept des Tages:";
             tagLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
             //tagLabel.FontAttributes = FontAttributes.Bold;
             tagLabel.HorizontalOptions = LayoutOptions.Start;
+            tagLabel.Margin = new Thickness(20, 20, 20, 20);
+
 
 
 

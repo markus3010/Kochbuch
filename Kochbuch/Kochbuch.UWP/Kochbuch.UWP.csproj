@@ -128,6 +128,7 @@
     <Content Include="Haus.png" />
     <Content Include="Kochloeffel.png" />
     <Content Include="Kreuz.png" />
+    <Content Include="Logo.png" />
     <Content Include="Mensch.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
