@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using SQLite;
 
 namespace Kochbuch
 {
     public class RezeptModel
     {
-        //[PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Titel { get; set; }
         public schwierigkeit Schwierigkeit { get; set; }

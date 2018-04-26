@@ -18,19 +18,19 @@ namespace Kochbuch
                 Orientation = StackOrientation.Horizontal,
                 Children = {
                     new Label {
-                        Text = zutat.menge.ToString(),
+                        Text = zutat.Menge.ToString(),
                         HorizontalOptions = LayoutOptions.Start,
                         WidthRequest = 20
                     },
                     new Label
                     {
-                        Text = zutat.einheit,
+                        Text = zutat.Einheit,
                         HorizontalOptions = LayoutOptions.Start,
                         WidthRequest = 20
                     },
                     new Label
                     {
-                        Text = zutat.art,
+                        Text = zutat.Art,
                         HorizontalOptions = LayoutOptions.Start
                     }
                 }

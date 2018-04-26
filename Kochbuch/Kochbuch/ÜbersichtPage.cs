@@ -16,9 +16,10 @@ namespace Kochbuch
 
         private int adjustedWidth;
         private int adjustedHeigth;
+        private LokalDb db;
         private ÜbersichtPage()
         {
-
+            db = new LokalDb();
 
             RezeptModel rezept =
                new RezeptModel
@@ -30,21 +31,21 @@ namespace Kochbuch
                        {
                             new ZutatModel
                             {
-                                menge = 4,
-                                einheit = "",
-                                art = "Kalbsschnitzel"
+                                Menge = 4,
+                                Einheit = "",
+                                Art = "Kalbsschnitzel"
                             },
                             new ZutatModel
                             {
-                                menge = 2,
-                                einheit = "",
-                                art = "Eier"
+                                Menge = 2,
+                                Einheit = "",
+                                Art = "Eier"
                             },
                             new ZutatModel
                             {
-                                menge = 2,
-                                einheit = "EL",
-                                art = "geschlangene Sahne"
+                                Menge = 2,
+                                Einheit = "EL",
+                                Art = "geschlangene Sahne"
                             }
                        },
                    Beschreibung = @"Fleisch nacheinander in einem großen Gefrierbeutel ca. 5 mm dünn plattieren.
@@ -57,17 +58,17 @@ namespace Kochbuch
     Warm halten bekommt Schnitzeln nicht. Am besten backen Sie sie frisch, teilen und backen dann die Nächsten."
 
                };
-
-
+            
+            
 
             layout = new StackLayout();
             layout.VerticalOptions = LayoutOptions.FillAndExpand;
             layout.HorizontalOptions = LayoutOptions.FillAndExpand;
             this.Content = layout;
-            layout.Children.Add(new StartSeiteView(rezept));
+           
             
             this.SizeChanged += ÜbersichtPage_SizeChanged;
-
+            SetRezeptAsync(rezept);
         }
 
         private void ÜbersichtPage_SizeChanged(object sender, EventArgs e)
@@ -123,19 +124,13 @@ namespace Kochbuch
                 return instance;
             }
         }
-        public void SetRezepte(List<RezeptModel> rezepte)
+        public async void SetRezeptAsync(RezeptModel rezept)
         {
-            ScrollView rezepeteScroll = new ScrollView();
+            await db.SaveRezeptAsync(rezept);
+            layout.Children.Add(new Label { Text = rezept.ID.ToString() });
+            //RezeptModel rezept1 = await db.GetRezeptAsync(rezept.ID);
+            //layout.Children.Add(new StartSeiteView(rezept1));
 
-            layout.Children.Add(rezepeteScroll);
-            StackLayout rezepeteScrollLayout = new StackLayout();
-            
-            rezepeteScrollLayout.Padding = new Thickness(50, 50, 50, 50);
-            rezepeteScroll.Content = rezepeteScrollLayout;
-            foreach (RezeptModel rezept in rezepte)
-            {
-                rezepeteScrollLayout.Children.Add(new RezeptView(rezept));
-            }
         }
     }
 }
