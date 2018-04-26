@@ -15,8 +15,12 @@ namespace Kochbuch
         {
             this.rezept = rezept;
             ScrollView scroll = new ScrollView();
+            scroll.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            scroll.VerticalOptions = LayoutOptions.CenterAndExpand;
             Content = scroll;
             layout = new StackLayout();
+            layout.VerticalOptions = LayoutOptions.CenterAndExpand;
+            layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
             scroll.Content = layout;
 
             layout.Children.Add(new Label

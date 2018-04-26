@@ -54,14 +54,18 @@ namespace Kochbuch
             if(heigth > width)
             {
                 layout.Orientation = StackOrientation.Vertical;
-                layout.VerticalOptions = LayoutOptions.Start;
-                layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                
+                layout.VerticalOptions = LayoutOptions.CenterAndExpand;
+
+                layout.HorizontalOptions = LayoutOptions.Start;
             }
             else
             {
                 layout.Orientation = StackOrientation.Horizontal;
-                layout.HorizontalOptions = LayoutOptions.Start;
-                layout.VerticalOptions = LayoutOptions.CenterAndExpand;
+               
+                layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
+
+                layout.VerticalOptions = LayoutOptions.Start;
             }
             
         
@@ -90,13 +94,14 @@ namespace Kochbuch
                 if(layout.Orientation == StackOrientation.Vertical)
                 {
                     image.HeightRequest = imageHeight;
-                    image.VerticalOptions = LayoutOptions.FillAndExpand;
-
+                    image.VerticalOptions = LayoutOptions.CenterAndExpand;
+                    image.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 }
                 else
                 {
                     image.WidthRequest = imageWidth;
-                    image.HorizontalOptions = LayoutOptions.FillAndExpand;
+                    image.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                    image.VerticalOptions = LayoutOptions.CenterAndExpand;
                 }
             } 
             
