@@ -9,8 +9,8 @@ namespace Kochbuch
     {
         [AutoIncrement,PrimaryKey]
         public int ID { get; set; }
-        public int RezeptID;
-        public int ZutatID;
+        public int RezeptID { get; set; }
+        public int ZutatID { get; set; }
         
     }
 }

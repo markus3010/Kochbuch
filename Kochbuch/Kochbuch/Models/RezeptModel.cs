@@ -12,6 +12,7 @@ namespace Kochbuch
         public string Titel { get; set; }
         public schwierigkeit Schwierigkeit { get; set; }
         public string Autor { get; set; }
+        [Ignore]
         public List<ZutatModel> Zutaten { get; set; }
         public string Beschreibung { get; set; }
 

@@ -4,67 +4,61 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite;
-
+using Xamarin.Forms;
 
 namespace Kochbuch
 {
     class LokalDb : IRezeptDb
     {
-        private string connectionString;
+        private string filePath;
         SQLiteAsyncConnection connection;
+        private static LokalDb database;
 
-        public LokalDb()
+        private LokalDb()
         {
-            connectionString = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "kochbuch.db");
-            SQLiteAsyncConnection connection = Connect();
+
+            connection = Connect();
             CreateTables(connection);
+            
         }
+
 
         public async Task<RezeptModel> GetRezeptAsync(int ID)
         {
             try
             {
-                RezeptModel rezept = new RezeptModel();
-                var rezeptSuche = connection.Table<RezeptModel>().Where(v => v.ID.Equals(ID));
-                var rezeptErgebnis = await rezeptSuche.ToListAsync();
-                foreach(var suchergebnis in rezeptErgebnis)
-                {
-                    rezept = suchergebnis;
-                }
-                if(rezeptErgebnis.Count == 0)
-                {
-                    return null;
-                }
-                int rezeptID = rezept.ID;
+                RezeptModel rezeptErgebnis = new RezeptModel();
+                rezeptErgebnis = await connection.Table<RezeptModel>().Where(v => v.ID == ID).FirstOrDefaultAsync();
+                
+                rezeptErgebnis.Zutaten = new List<ZutatModel>();
+                int rezeptID = rezeptErgebnis.ID;
                 List<int> zutatIDs = new List<int>();
-                var verbindungSuche = connection.Table<RezeptZutatVerbindung>().Where(v => v.RezeptID.Equals(rezeptID));
-                var verbindungErgebnis = await verbindungSuche.ToListAsync();
+                var verbindungErgebnis = await connection.Table<RezeptZutatVerbindung>().Where(v => v.RezeptID  == rezeptID).ToListAsync();
                 foreach(var suchergebnis in verbindungErgebnis)
                 {
                     zutatIDs.Add(suchergebnis.ZutatID);
                 }
-                foreach (int rezeptIDErgebnis in zutatIDs) {
-                    var zutatSuche = connection.Table<ZutatModel>().Where(v => v.ID.Equals(rezeptIDErgebnis));
-                    var zutatErgebnis = await zutatSuche.ToListAsync();
-                    foreach(var zutat in zutatErgebnis)
+                foreach (int zutatIDErgebnis in zutatIDs) {
+                    var zutatErgebnis = await connection.Table<ZutatModel>().Where(v => v.ID == zutatIDErgebnis).ToListAsync();
+                    foreach (var zutat in zutatErgebnis)
                     {
-                        rezept.Zutaten.Add(zutat);
+                        rezeptErgebnis.Zutaten.Add(zutat);
                     }
                 }
-                return rezept;
+            return rezeptErgebnis;
             }
             catch(Exception e)
             {
-                return new RezeptModel
-                {
-                    Titel = "Fehler: " + e.Message
-                };
+                System.Diagnostics.Debug.Write(e.Message);
+                ÜbersichtPage.ShowAlert(e.Source, e.Message);
+                return null;
             }
             
         }
 
         public async Task<RezeptModel> GetRezeptAsync(string Titel)
         {
+            
             try
             {
                 RezeptModel rezept = new RezeptModel();
@@ -73,10 +67,6 @@ namespace Kochbuch
                 foreach (var suchergebnis in rezeptErgebnis)
                 {
                     rezept = suchergebnis;
-                }
-                if (rezeptErgebnis.Count == 0)
-                {
-                    return null;
                 }
                 int rezeptID = rezept.ID;
                 List<int> zutatIDs = new List<int>();
@@ -99,10 +89,8 @@ namespace Kochbuch
             }
             catch (Exception e)
             {
-                return new RezeptModel
-                {
-                    Titel = "Fehler: " + e.Message
-                };
+                System.Diagnostics.Debug.Write(e.Message);
+                return null;
             }
         }
 
@@ -120,10 +108,8 @@ namespace Kochbuch
                 }
             }catch (Exception e)
             {
-                rezepte.Add(new RezeptModel
-                {
-                    Titel = "Fehler: " + e.Message
-                });
+                System.Diagnostics.Debug.Write(e.Message);
+                return null;
             }
             return rezepte;
         }
@@ -142,18 +128,17 @@ namespace Kochbuch
                 }
                 foreach (int zuatatID in zutatIDs)
                 {
-                    RezeptZutatVerbindung rezeptZutatVerbindung = new RezeptZutatVerbindung
-                    {
-                        RezeptID = rezeptID,
-                        ZutatID = zuatatID
-                    };
+                    RezeptZutatVerbindung rezeptZutatVerbindung = new RezeptZutatVerbindung();
+                    rezeptZutatVerbindung.RezeptID = rezept.ID;
+                    rezeptZutatVerbindung.ZutatID = zuatatID;
                     await connection.InsertAsync(rezeptZutatVerbindung);
                 }
                 return true;
 
             }
-            catch 
+            catch(Exception e) 
             {
+                ÜbersichtPage.ShowAlert("ERROR", e.Message);
                 return false;
             }
         }
@@ -171,7 +156,8 @@ namespace Kochbuch
 
         private SQLiteAsyncConnection Connect()
         {
-            var db = new SQLiteAsyncConnection(connectionString);
+            filePath = DependencyService.Get<IFileHelper>().GetLocalFilePath("KochbuchDb.db3");
+            var db = new SQLiteAsyncConnection(filePath);
             return db;
         }
         private async void CreateTables(SQLiteAsyncConnection connection)
@@ -179,6 +165,18 @@ namespace Kochbuch
             await connection.CreateTableAsync<RezeptModel>();
             await connection.CreateTableAsync<ZutatModel>();
             await connection.CreateTableAsync<RezeptZutatVerbindung>();
+            //await connection.ExecuteAsync("Delete From RezeptModel");
+            //await connection.ExecuteAsync("Delete From ZutatModel");
+            //await connection.ExecuteAsync("Delete From RezeptZutatVerbindung");
+            
+        }
+        public static LokalDb GetInstance()
+        {
+            if (database == null)
+            {
+                database = new LokalDb();
+            }
+            return database;
         }
     }
 }
