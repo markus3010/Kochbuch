@@ -127,6 +127,7 @@
     <Content Include="Assets\StoreLogo.scale-400.png" />
     <Content Include="Erde.png" />
     <Content Include="Haus.png" />
+    <Content Include="Save.png" />
     <Content Include="Kochloeffel.png" />
     <Content Include="Kreuz.png" />
     <Content Include="Logo.png" />

@@ -103,14 +103,32 @@ namespace Kochbuch
                     image.HorizontalOptions = LayoutOptions.CenterAndExpand;
                     image.VerticalOptions = LayoutOptions.CenterAndExpand;
                 }
-            } 
+            }
+            TapGestureRecognizer imageHausClickRecognizer = new TapGestureRecognizer();
+            imageHaus.GestureRecognizers.Add(imageHausClickRecognizer);
+            imageHausClickRecognizer.Tapped += ImageHausTapRecognizer_Tapped;
+
+            TapGestureRecognizer imageMenschTapRecognizer = new TapGestureRecognizer();
+            imageMensch.GestureRecognizers.Add(imageMenschTapRecognizer);
+            imageMenschTapRecognizer.Tapped += ImageMenschTapRecognizer_Tapped;
             
+
 
             layout.Children.Add(imageHaus);
             layout.Children.Add(imageErde);
             layout.Children.Add(imageMensch);
             layout.Children.Add(imageKreuz);
             
+        }
+
+        private async void ImageMenschTapRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await ÜbersichtController.getInstance().SetzeInhaltEigeneRezepte();
+        }
+
+        private async void ImageHausTapRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await ÜbersichtController.getInstance().SetzeInhaltStartSeite();
         }
     }
 }

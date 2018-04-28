@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Kochbuch
@@ -12,14 +12,16 @@ namespace Kochbuch
         private ScrollView scroll;
         private StackLayout layout;
         private RezeptModel rezept;
-        public StartSeiteView(RezeptModel rezept)
+        private static StartSeiteView instance;
+        private StartSeiteView()
         {
-            this.rezept = rezept;
             scroll = new ScrollView();
             this.Content = scroll;
             layout = new StackLayout();
 
             scroll.Content = layout;
+            scroll.HorizontalOptions = LayoutOptions.FillAndExpand;
+            layout.HorizontalOptions = LayoutOptions.FillAndExpand;
 
 
             Image logo = new Image();
@@ -34,26 +36,30 @@ namespace Kochbuch
             Label tagLabel = new Label();
             tagLabel.Text = "Rezept des Tages:";
             tagLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
-            //tagLabel.FontAttributes = FontAttributes.Bold;
             tagLabel.HorizontalOptions = LayoutOptions.Start;
             tagLabel.Margin = new Thickness(20, 20, 20, 20);
-
-
-
-
-            RezeptView rezeptView = new RezeptView(rezept);
-
-            rezeptView.Padding = new Thickness(20, 20, 20, 20);
-
+            
             layout.Children.Add(logo);
             layout.Children.Add(willkommenLabel);
             layout.Children.Add(tagLabel);
-            layout.Children.Add(rezeptView);
+            
         }
-
-        public void SetzeRezept(RezeptModel rezept)
+        public static StartSeiteView getInstance()
         {
-            this.rezept = rezept;
+            if(instance ==null)
+            {
+                instance = new StartSeiteView();
+            }
+            
+            return instance;
+        }
+        public void SetzeRezeptView(RezeptView rezept)
+        {
+            if(layout.Children.Count > 3)
+            {
+                layout.Children.RemoveAt(3);
+            }
+            layout.Children.Add(rezept);
         }
     }
 }

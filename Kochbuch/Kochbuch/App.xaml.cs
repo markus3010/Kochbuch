@@ -12,14 +12,14 @@ namespace Kochbuch
 		public App ()
 		{
 			InitializeComponent();
-
-			MainPage = ÜbersichtPage.getInstance();
+            MainPage = ÜbersichtPage.getInstance();
+           
 		}
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
+            //ÜbersichtController.getInstance().SetzeInhaltStartSeite();
+        }
 
 		protected override void OnSleep ()
 		{

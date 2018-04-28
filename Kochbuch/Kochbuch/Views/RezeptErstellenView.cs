@@ -17,7 +17,8 @@ namespace Kochbuch
             Content = scroll;
             layout = new StackLayout();
             scroll.Content = layout;
-            layout.Margin = new Thickness(20, 20, 20, 20);
+            layout.Margin = new Thickness(20, 20);
+            
 
             Label labelTitel = new Label();
             labelTitel.Text = "Titel";
@@ -42,9 +43,41 @@ namespace Kochbuch
             pickerSchwierigkeit.Items.Add("Schwer");
             layout.Children.Add(pickerSchwierigkeit);
 
+            Label labelZutaten = new Label();
+            labelZutaten.Text = "Zutaten";
+            layout.Children.Add(labelZutaten);
+
+            Button btnZutatHinzufuegen = new Button();
+            btnZutatHinzufuegen.Text = "Zutat hinzufügen";
+            btnZutatHinzufuegen.Clicked += BtnZutatHinzufuegen_Clicked;
+            layout.Children.Add(btnZutatHinzufuegen);
+
+            layout.Children.Add(new ZutatErstellenView());
 
 
+            Label labelBeschreibung = new Label();
+            labelBeschreibung.Text = "Beschreibung";
+            layout.Children.Add(labelBeschreibung);
+            /*
+            Entry entryBeschreibung = new Entry();
+            entryBeschreibung.Placeholder = "Beschreibung";
+            entryBeschreibung.PlaceholderColor = Color.LightGray;
+            entryBeschreibung.HeightRequest = 500;
+            layout.Children.Add(entryBeschreibung);
+            */
+            Editor editorBeschreibung = new Editor();
+            editorBeschreibung.HeightRequest = 500;
+            layout.Children.Add(editorBeschreibung);
+
+            Button btnSpeichern = new Button();
+            btnSpeichern.Text = "Speichern";
+            layout.Children.Add(btnSpeichern);
+        }
+
+        private void BtnZutatHinzufuegen_Clicked(object sender, EventArgs e)
+        {
+            layout.Children.Insert(layout.Children.Count-3, new ZutatErstellenView());
 
         }
-	}
+    }
 }
