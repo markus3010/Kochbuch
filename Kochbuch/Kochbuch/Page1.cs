@@ -15,7 +15,7 @@ namespace Kochbuch
 		{
             layout = new StackLayout();
             Content = layout;
-            layout.Children.Add(new RezeptErstellenView());
+            layout.Children.Add(RezeptErstellenView.getInstance());
         }
 
       

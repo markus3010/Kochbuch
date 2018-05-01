@@ -20,18 +20,16 @@ namespace Kochbuch
                     new Label {
                         Text = zutat.Menge.ToString(),
                         HorizontalOptions = LayoutOptions.Start,
-                        WidthRequest = 20
                     },
                     new Label
                     {
                         Text = zutat.Einheit,
                         HorizontalOptions = LayoutOptions.Start,
-                        WidthRequest = 20
                     },
                     new Label
                     {
                         Text = zutat.Art,
-                        HorizontalOptions = LayoutOptions.Start
+                        HorizontalOptions = LayoutOptions.End
                     }
                 }
             };

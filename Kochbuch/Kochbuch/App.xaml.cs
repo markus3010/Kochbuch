@@ -13,7 +13,7 @@ namespace Kochbuch
 		{
 			InitializeComponent();
             MainPage = ÜbersichtPage.getInstance();
-           
+            //MainPage = new Page1();
 		}
 
 		protected override void OnStart ()

@@ -23,8 +23,8 @@ namespace Kochbuch
             db = LokalDb.GetInstance();
             layout = new StackLayout();
             Content = layout;
-            layout.VerticalOptions = LayoutOptions.FillAndExpand;
-            layout.HorizontalOptions = LayoutOptions.FillAndExpand;
+            layout.VerticalOptions = LayoutOptions.StartAndExpand;
+            layout.HorizontalOptions = LayoutOptions.Start;
             this.SizeChanged += ÜbersichtPage_SizeChanged;
             
         }
@@ -88,12 +88,10 @@ namespace Kochbuch
         }
         public void SetContent(View view)
         {
-            //ShowAlert("ALERT",layout.Children.Count.ToString());
             if(layout.Children.Count > 1)
             {
                 layout.Children.RemoveAt(1);
             }
-            //ShowAlert("ALERT", layout.Children.Count.ToString());
             layout.Children.Add(view);
         }
     }

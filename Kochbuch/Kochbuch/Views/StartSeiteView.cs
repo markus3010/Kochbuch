@@ -31,14 +31,15 @@ namespace Kochbuch
             willkommenLabel.Text = "MeiKochbuch! - Ihr Onlinekochbuch!";
             willkommenLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
             willkommenLabel.FontAttributes = FontAttributes.Bold;
-            willkommenLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            willkommenLabel.HorizontalOptions = LayoutOptions.Center;
 
             Label tagLabel = new Label();
             tagLabel.Text = "Rezept des Tages:";
             tagLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
             tagLabel.HorizontalOptions = LayoutOptions.Start;
             tagLabel.Margin = new Thickness(20, 20, 20, 20);
-            
+            tagLabel.WidthRequest = 5000;
+
             layout.Children.Add(logo);
             layout.Children.Add(willkommenLabel);
             layout.Children.Add(tagLabel);

@@ -31,7 +31,7 @@ namespace Kochbuch
             {
                 int anzahl = rezepte.Count;
                 Random random = new Random();
-                int auswahl = random.Next(anzahl) +1;
+                int auswahl = random.Next(anzahl);
                 StartSeiteView startSeite = StartSeiteView.getInstance();
                 startSeite.SetzeRezeptView(new RezeptView(rezepte[auswahl]));
             }

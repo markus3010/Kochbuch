@@ -104,21 +104,28 @@ namespace Kochbuch
                     image.VerticalOptions = LayoutOptions.CenterAndExpand;
                 }
             }
-            TapGestureRecognizer imageHausClickRecognizer = new TapGestureRecognizer();
-            imageHaus.GestureRecognizers.Add(imageHausClickRecognizer);
-            imageHausClickRecognizer.Tapped += ImageHausTapRecognizer_Tapped;
+            TapGestureRecognizer imageHausTapRecognizer = new TapGestureRecognizer();
+            imageHaus.GestureRecognizers.Add(imageHausTapRecognizer);
+            imageHausTapRecognizer.Tapped += ImageHausTapRecognizer_Tapped;
 
             TapGestureRecognizer imageMenschTapRecognizer = new TapGestureRecognizer();
             imageMensch.GestureRecognizers.Add(imageMenschTapRecognizer);
             imageMenschTapRecognizer.Tapped += ImageMenschTapRecognizer_Tapped;
-            
 
+            TapGestureRecognizer imageKreuzTapRecognizer = new TapGestureRecognizer();
+            imageKreuz.GestureRecognizers.Add(imageKreuzTapRecognizer);
+            imageKreuzTapRecognizer.Tapped += ImageKreuzTapRecognizer_Tapped;
 
             layout.Children.Add(imageHaus);
             layout.Children.Add(imageErde);
             layout.Children.Add(imageMensch);
             layout.Children.Add(imageKreuz);
             
+        }
+
+        private void ImageKreuzTapRecognizer_Tapped(object sender, EventArgs e)
+        {
+            ÜbersichtController.getInstance().SetzeInhaltRezeptErstellen();
         }
 
         private async void ImageMenschTapRecognizer_Tapped(object sender, EventArgs e)

@@ -24,6 +24,7 @@ namespace Kochbuch
             Label labelÜberschrift = new Label();
             labelÜberschrift.Text = "Eigene Rezepte";
             labelÜberschrift.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+            labelÜberschrift.WidthRequest = 5000;
             layout.Children.Add(labelÜberschrift);
 
             layout.Children.Add(scroll);

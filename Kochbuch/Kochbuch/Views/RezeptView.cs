@@ -16,19 +16,21 @@ namespace Kochbuch
             this.rezept = rezept;
             ScrollView scroll = new ScrollView();
             scroll.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            scroll.VerticalOptions = LayoutOptions.CenterAndExpand;
+            scroll.VerticalOptions = LayoutOptions.StartAndExpand;
             Content = scroll;
             layout = new StackLayout();
-            layout.VerticalOptions = LayoutOptions.CenterAndExpand;
+            layout.VerticalOptions = LayoutOptions.StartAndExpand;
             layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
             scroll.Content = layout;
+
 
             layout.Children.Add(new Label
             {
                 Text = rezept.Titel,
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                 FontAttributes = FontAttributes.Bold,
-                HorizontalOptions = LayoutOptions.StartAndExpand
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                WidthRequest = 5000
             });
             layout.Children.Add(
                 new Label
@@ -69,6 +71,23 @@ namespace Kochbuch
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label))
             });
+        }
+
+        private void BtnZurück_Clicked(object sender, EventArgs e)
+        {
+            ÜbersichtController.getInstance().SetzeInhaltLezter();
+        }
+
+        public void ZeigeZurückButton(bool zeigeButton)
+        {
+            if(zeigeButton == true)
+            {
+
+                Button btnZurück = new Button();
+                btnZurück.Text = "Zurück";
+                btnZurück.Clicked += BtnZurück_Clicked;
+                layout.Children.Insert(0,btnZurück);
+            }
         }
     }
 }

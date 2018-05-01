@@ -26,7 +26,7 @@ namespace Kochbuch
                 Text = rezept.Titel,
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                 FontAttributes = FontAttributes.Bold,
-                HorizontalOptions = LayoutOptions.StartAndExpand
+                HorizontalOptions = LayoutOptions.StartAndExpand,
             });
             layout.Children.Add(
                 new Label
@@ -50,6 +50,14 @@ namespace Kochbuch
                 anzahlKochloeffel--;
             }
             while (anzahlKochloeffel > 0);
+            TapGestureRecognizer layoutTapRecognizer = new TapGestureRecognizer();
+            layout.GestureRecognizers.Add(layoutTapRecognizer);
+            layoutTapRecognizer.Tapped += LayoutTapRecognizer_Tapped;
+        }
+
+        private async void LayoutTapRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await ÜbersichtController.getInstance().SetzeInhaltRezept(rezept.ID);
         }
     }
 }

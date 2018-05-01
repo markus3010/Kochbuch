@@ -11,6 +11,9 @@ namespace Kochbuch
 	{
         private StackLayout layout;
         private ScrollView scroll;
+        private Entry entryMenge;
+        private Entry entryEinheit;
+        private Entry entryZutat;
         public ZutatErstellenView()
         {
           
@@ -29,7 +32,7 @@ namespace Kochbuch
             layout.Children.Add(labelMenge);
             labelMenge.HorizontalOptions = LayoutOptions.Start;
 
-            Entry entryMenge = new Entry();
+            entryMenge = new Entry();
             entryMenge.Placeholder = "Menge";
             entryMenge.PlaceholderColor = Color.LightGray;
             layout.Children.Add(entryMenge);
@@ -41,7 +44,7 @@ namespace Kochbuch
             layout.Children.Add(labelEineheit);
             labelEineheit.HorizontalOptions = LayoutOptions.Start;
 
-            Entry entryEinheit = new Entry();
+            entryEinheit = new Entry();
             entryEinheit.Placeholder = "Einheit";
             entryEinheit.PlaceholderColor = Color.LightGray;
             layout.Children.Add(entryEinheit);
@@ -53,7 +56,7 @@ namespace Kochbuch
             layout.Children.Add(labelZutat);
             labelZutat.HorizontalOptions = LayoutOptions.Start;
 
-            Entry entryZutat = new Entry();
+            entryZutat = new Entry();
             entryZutat.Placeholder = "Zutat";
             entryZutat.PlaceholderColor = Color.LightGray;
             layout.Children.Add(entryZutat);
@@ -64,7 +67,47 @@ namespace Kochbuch
             btnSpeichern.HeightRequest = 25;
             btnSpeichern.Source = (FileImageSource) ImageSource.FromFile("Save.png");
             btnSpeichern.HorizontalOptions = LayoutOptions.End;
+            TapGestureRecognizer recognizerSpeichern = new TapGestureRecognizer();
+            btnSpeichern.GestureRecognizers.Add(recognizerSpeichern);
+            recognizerSpeichern.Tapped += RecognizerSpeichern_Tapped;
             layout.Children.Add(btnSpeichern);
         }
+
+        private void RecognizerSpeichern_Tapped(object sender, EventArgs e)
+        {
+            RezeptErstellenController.getInstance().ZuatatHizufuegen(this);
+        }
+
+        public void SetMenge(int menge)
+        {
+            entryMenge.Text = menge.ToString();
+        }
+        public void SetEinheit(string einheit)
+        {
+            entryEinheit.Text = einheit;
+        }
+        public void SetZutat(string zutat)
+        {
+            entryZutat.Text = zutat;
+        }
+        public int GetMenge()
+        {
+            int menge = 0;
+            try { menge = Convert.ToInt32(entryMenge.Text); }
+            catch
+            {
+                return -1;
+            }
+            return menge;
+        }
+        public string  GetEinheit()
+        {
+            return entryEinheit.Text;
+        }
+        public string GetZutat()
+        {
+            return entryZutat.Text;
+        }
     }
+    
 }
