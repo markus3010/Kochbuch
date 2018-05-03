@@ -38,9 +38,7 @@ namespace Kochbuch
 
             Image  btnBearbeiten = new Image();
             btnBearbeiten.Source = (FileImageSource)ImageSource.FromFile("Bearbeiten.png");
-            //btnBearbeiten.Text = "Bearbeiten";
             btnBearbeiten.HorizontalOptions = LayoutOptions.End;
-            //btnBearbeiten.Clicked += BtnBearbeiten_Clicked;
             TapGestureRecognizer recognizerBearbeiten = new TapGestureRecognizer();
             btnBearbeiten.GestureRecognizers.Add(recognizerBearbeiten);
             recognizerBearbeiten.Tapped += BtnBearbeiten_Clicked;
