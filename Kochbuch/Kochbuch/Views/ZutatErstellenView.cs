@@ -77,7 +77,7 @@ namespace Kochbuch
 
         private void RecognizerSpeichern_Tapped(object sender, EventArgs e)
         {
-            RezeptErstellenController.getInstance().ZuatatHizufuegen(this);
+            RezeptErstellenController.getInstance().ZuatatHinzufuegen(this);
         }
 
         public void SetMenge(int menge)

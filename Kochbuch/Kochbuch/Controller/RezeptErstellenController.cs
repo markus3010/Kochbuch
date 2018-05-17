@@ -31,7 +31,7 @@ namespace Kochbuch
             erstellenView.SetZutat(erstelltView.GetArt());
         }
 
-        public void ZuatatHizufuegen(ZutatErstellenView erstellenView)
+        public void ZuatatHinzufuegen(ZutatErstellenView erstellenView)
         {
             ZutatErstelltView erstelltView = RezeptErstellenView.getInstance().ZutatHinzufuegen();
             erstelltView.SetMenge(erstellenView.GetMenge());

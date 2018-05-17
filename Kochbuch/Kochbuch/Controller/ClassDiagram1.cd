@@ -1,38 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Kochbuch.RezeptView">
-    <Position X="9.25" Y="4.5" Width="1.5" />
+    <Position X="4.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAACAAAAAA=</HashCode>
       <FileName>Views\RezeptView.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Kochbuch.RezeptListView">
-    <Position X="11.25" Y="4" Width="1.5" />
+    <Position X="11.5" Y="3" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>Views\RezeptListView.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kochbuch.EigeneRezepteView">
-    <Position X="12.5" Y="1" Width="1.5" />
+  <Class Name="Kochbuch.ZutatView">
+    <Position X="8" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAABAACQAAAAACIAAAAA=</HashCode>
-      <FileName>Views\EigeneRezepteView.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ZutatView.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kochbuch.EigeneRezepteController">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+  <Class Name="Kochbuch.StartSeiteView" Collapsed="true">
+    <Position X="12" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAAAAA=</HashCode>
-      <FileName>Controller\EigeneRezepteController.cs</FileName>
+      <HashCode>AAAAAAAEAAAEAAAAAAAAAAAAAABAACQAAAAACAAAAAA=</HashCode>
+      <FileName>Views\StartSeiteView.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kochbuch.ZutatModel">
-    <Position X="10.75" Y="0.5" Width="1.5" />
+  <Class Name="Kochbuch.Seitenleiste" Collapsed="true">
+    <Position X="10.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAYAAAACAAAAAAAA=</HashCode>
-      <FileName>Models\ZutatModel.cs</FileName>
+      <HashCode>AAAAAABEAAAAAEAAAEAAAAQCMABAgAQAAAAgCAAAAAA=</HashCode>
+      <FileName>Views\Seitenleiste.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
