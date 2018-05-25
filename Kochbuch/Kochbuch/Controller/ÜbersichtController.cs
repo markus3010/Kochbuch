@@ -27,44 +27,38 @@ namespace Kochbuch
         }
         public async Task SetzeInhaltStartSeite()
         {
-            lastView = currentView;
-            page.SetContent(StartSeiteView.getInstance());
             await StartSeiteController.getInstance().SetRezeptAsync();
-            currentView = StartSeiteView.getInstance();
+            SetzeInhalt(StartSeiteView.getInstance());
         }
 
         public async  Task SetzeInhaltEigeneRezepte()
         {
-            lastView = currentView;
-            page.SetContent(EigeneRezepteView.getInstance());
             await EigeneRezepteController.getInstance().SetRezepte();
-            currentView = EigeneRezepteView.getInstance();
+            SetzeInhalt(EigeneRezepteView.getInstance());
         }
         public async Task SetzeInhaltRezept(int rezeptID)
         {
-            lastView = currentView;
             RezeptModel rezept = await LokalDb.GetInstance().GetRezeptAsync(rezeptID);
             RezeptView rezeptView = new RezeptView(rezept);
             rezeptView.ZeigeZurückButton(true);
-            page.SetContent(rezeptView);
-            currentView = rezeptView;
+            SetzeInhalt(rezeptView);
         }
         public void SetzeInhaltLezter()
         {
-            if(lastView != null)
-            {
-                currentView = lastView;
-                page.SetContent(currentView);
-                lastView = null;
-            }
+            SetzeInhalt(lastView);
         }
-
         public  void SetzeInhaltRezeptErstellen()
         {
-            lastView = currentView;
-            var view = RezeptErstellenView.getInstance();
-            page.SetContent(view);
-            currentView = view;
+            SetzeInhalt(RezeptErstellenView.getInstance());
+        }
+        private void SetzeInhalt(View view)
+        {
+            if(view != null)
+            {
+                lastView = currentView;
+                page.SetContent(view);
+                currentView = view;
+            }
         }
     }
 }

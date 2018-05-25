@@ -13,13 +13,12 @@ namespace Kochbuch
 		{
 			InitializeComponent();
             
-            MainPage = AnmeldenController.getInstance().GetPage(this);
+            MainPage = AnmeldenController.getInstance().GetPage();
             //MainPage = new Page1();
 		}
 
 		protected override void OnStart ()
 		{
-            ÜbersichtController.getInstance().SetzeInhaltStartSeite();
         }
 
 		protected override void OnSleep ()

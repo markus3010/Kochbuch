@@ -66,13 +66,7 @@ namespace Kochbuch
             Label labelBeschreibung = new Label();
             labelBeschreibung.Text = "Beschreibung";
             layout.Children.Add(labelBeschreibung);
-            /*
-            Entry entryBeschreibung = new Entry();
-            entryBeschreibung.Placeholder = "Beschreibung";
-            entryBeschreibung.PlaceholderColor = Color.LightGray;
-            entryBeschreibung.HeightRequest = 500;
-            layout.Children.Add(entryBeschreibung);
-            */
+
             editorBeschreibung = new Editor();
             editorBeschreibung.VerticalOptions = LayoutOptions.CenterAndExpand;
             editorBeschreibung.HeightRequest = 500;
@@ -83,6 +77,11 @@ namespace Kochbuch
             btnSpeichern.Text = "Speichern";
             layout.Children.Add(btnSpeichern);
             btnSpeichern.Clicked += BtnSpeichern_Clicked;
+        }
+
+        internal void DeleteAll()
+        {
+            instance = new RezeptErstellenView();
         }
 
         private async void BtnSpeichern_Clicked(object sender, EventArgs e)
