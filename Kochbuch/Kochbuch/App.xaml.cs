@@ -12,7 +12,8 @@ namespace Kochbuch
 		public App ()
 		{
 			InitializeComponent();
-            MainPage = ÜbersichtPage.getInstance();
+            
+            MainPage = AnmeldenController.getInstance().GetPage(this);
             //MainPage = new Page1();
 		}
 

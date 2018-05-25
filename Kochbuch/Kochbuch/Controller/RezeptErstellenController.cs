@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Kochbuch
 {
@@ -46,6 +47,7 @@ namespace Kochbuch
             rezept.Titel = rezeptErstellenView.GetTitel();
             rezept.Schwierigkeit = rezeptErstellenView.GetSchwierigkeit();
             rezept.Beschreibung = rezeptErstellenView.GetBeschreibung();
+            rezept.Autor = Application.Current.Properties["username"].ToString();
             rezept.Zutaten = new List<ZutatModel>();
             foreach(ZutatErstelltView zutat in rezeptErstellenView.GetZutatErstelltViews())
             {
