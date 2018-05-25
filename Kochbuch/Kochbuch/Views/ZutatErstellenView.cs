@@ -19,6 +19,7 @@ namespace Kochbuch
           
             layout = new StackLayout();
             Content = layout;
+            
             layout.Orientation = StackOrientation.Horizontal;
             if(Device.RuntimePlatform == Device.Android)
             {
@@ -63,9 +64,10 @@ namespace Kochbuch
             entryZutat.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             Image btnSpeichern = new Image();
+            btnSpeichern.Scale = 2;
             btnSpeichern.WidthRequest = 25;
             btnSpeichern.HeightRequest = 25;
-            btnSpeichern.Source = (FileImageSource) ImageSource.FromFile("Save.png");
+            btnSpeichern.Source = (FileImageSource) ImageSource.FromFile("Speichern.png");
             btnSpeichern.HorizontalOptions = LayoutOptions.End;
             TapGestureRecognizer recognizerSpeichern = new TapGestureRecognizer();
             btnSpeichern.GestureRecognizers.Add(recognizerSpeichern);
@@ -75,7 +77,7 @@ namespace Kochbuch
 
         private void RecognizerSpeichern_Tapped(object sender, EventArgs e)
         {
-            RezeptErstellenController.getInstance().ZuatatHizufuegen(this);
+            RezeptErstellenController.getInstance().ZuatatHinzufuegen(this);
         }
 
         public void SetMenge(int menge)

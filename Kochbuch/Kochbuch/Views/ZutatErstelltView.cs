@@ -17,6 +17,7 @@ namespace Kochbuch
         {
             layout = new StackLayout();
             layout.Orientation = StackOrientation.Horizontal;
+            layout.BackgroundColor = Color.LightGray;
             labelMenge = new Label {
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 VerticalOptions = LayoutOptions.Center
@@ -34,10 +35,16 @@ namespace Kochbuch
             layout.Children.Add(labelMenge);
             layout.Children.Add(labelEinheit);
             layout.Children.Add(labelZutat);
-            Button btnBearbeiten = new Button();
-            btnBearbeiten.Text = "Bearbeiten";
+
+            Image  btnBearbeiten = new Image();
+            btnBearbeiten.Source = (FileImageSource)ImageSource.FromFile("Bearbeiten.png");
             btnBearbeiten.HorizontalOptions = LayoutOptions.End;
-            btnBearbeiten.Clicked += BtnBearbeiten_Clicked;
+            TapGestureRecognizer recognizerBearbeiten = new TapGestureRecognizer();
+            btnBearbeiten.GestureRecognizers.Add(recognizerBearbeiten);
+            recognizerBearbeiten.Tapped += BtnBearbeiten_Clicked;
+            btnBearbeiten.WidthRequest = 25;
+
+            btnBearbeiten.HeightRequest = 25;
             layout.Children.Add(btnBearbeiten);
 
             this.Content = layout;
@@ -66,18 +73,18 @@ namespace Kochbuch
         public void SetMenge(int menge)
         {
             labelMenge.Text = menge.ToString();
-            ÜbersichtPage.ShowAlert("ALERT", menge.ToString());
+            //ÜbersichtPage.ShowAlert("ALERT", menge.ToString());
         }
         public void SetEinheit(string einheit)
         {
             labelEinheit.Text = einheit;
 
-            ÜbersichtPage.ShowAlert("ALERT",einheit);
+           // ÜbersichtPage.ShowAlert("ALERT",einheit);
         }
         public void SetZutat(string zutat)
         {
             labelZutat.Text = zutat;
-            ÜbersichtPage.ShowAlert("ALERT", zutat);
+            //ÜbersichtPage.ShowAlert("ALERT", zutat);
         }
         private void BtnBearbeiten_Clicked(object sender, EventArgs e)
         {
