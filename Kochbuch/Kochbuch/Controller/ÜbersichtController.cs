@@ -64,8 +64,10 @@ namespace Kochbuch
 
         public async void SetzeInhaltOnlineRezepte()
         {
+            OnlineRezepteController.getInstance().Load(true);
+            SetzeInhalt(OnlineRezepteView.getInstance());
             await OnlineRezepteController.getInstance().SetRezepte();
-            SetzeInhalt(EigeneRezepteView.getInstance());
+            OnlineRezepteController.getInstance().Load(false);
         }
     }
 }

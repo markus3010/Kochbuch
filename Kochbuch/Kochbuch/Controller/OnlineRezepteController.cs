@@ -25,7 +25,11 @@ namespace Kochbuch
             var db = OnlineDb.getInstance();
             List<RezeptModel> rezepte = new List<RezeptModel>();
             rezepte = await db.GetRezeptModelsAsync();
-            EigeneRezepteView.getInstance().SetRezepte(rezepte);
+            OnlineRezepteView.getInstance().SetRezepte(rezepte);
+        }
+        public void Load(bool show)
+        {
+            OnlineRezepteView.getInstance().ShowLoadingIcon(show);
         }
     }
 }

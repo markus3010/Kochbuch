@@ -23,6 +23,18 @@ namespace Kochbuch
             layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
             scroll.Content = layout;
 
+            Image imageLöschen = new Image
+            {
+                Source = (FileImageSource)ImageSource.FromFile("Loeschen.png"),
+                HeightRequest = 35,
+                WidthRequest = 35,
+                HorizontalOptions = LayoutOptions.End,
+
+            };
+            layout.Children.Add(imageLöschen);
+            TapGestureRecognizer imageLöschenRecognizer = new TapGestureRecognizer();
+            imageLöschen.GestureRecognizers.Add(imageLöschenRecognizer);
+            imageLöschenRecognizer.Tapped += ImageLöschenRecognizer_Tapped;
 
             layout.Children.Add(new Label
             {
@@ -71,6 +83,12 @@ namespace Kochbuch
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label))
             });
+        }
+
+        private void ImageLöschenRecognizer_Tapped(object sender, EventArgs e)
+        {
+            LokalDb.GetInstance().DeleteRezept(rezept.ID);
+            ÜbersichtController.getInstance().SetzeInhaltLezter();
         }
 
         private void BtnZurück_Clicked(object sender, EventArgs e)

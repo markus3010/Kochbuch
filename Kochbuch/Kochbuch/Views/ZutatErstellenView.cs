@@ -87,7 +87,7 @@ namespace Kochbuch
 
 
             Image btnSpeichern = new Image();
-            btnSpeichern.Scale = 2;
+            //btnSpeichern.Scale = 2;
             btnSpeichern.WidthRequest = 35;
             btnSpeichern.HeightRequest = 35;
             btnSpeichern.Source = (FileImageSource) ImageSource.FromFile("Speichern.png");

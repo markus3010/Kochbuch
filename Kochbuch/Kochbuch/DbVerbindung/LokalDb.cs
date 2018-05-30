@@ -21,7 +21,29 @@ namespace Kochbuch
             CreateTables(connection);
             
         }
+        public async void DeleteRezept(int ID)
+        {
+            var connection = Connect();
+            await connection.DeleteAsync(await GetRezeptAsync(ID));
 
+            List<int> zutatIDs = new List<int>();
+
+            var verbindungErgebnis = await connection.Table<RezeptZutatVerbindung>().Where(v => v.RezeptID == ID).ToListAsync();
+            foreach (var suchergebnis in verbindungErgebnis)
+            {
+                zutatIDs.Add(suchergebnis.ZutatID);
+                await connection.DeleteAsync(suchergebnis);
+            }
+            foreach(int zutatID in zutatIDs)
+            {
+                var zutatErgebnis = await connection.Table<ZutatModel>().Where(v => v.ID == zutatID).ToListAsync();
+                foreach (var ergebnis in zutatErgebnis)
+                {
+
+                    await connection.DeleteAsync(ergebnis);
+                }
+            }
+        }
 
         public async Task<RezeptModel> GetRezeptAsync(int ID)
         {

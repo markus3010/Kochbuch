@@ -55,7 +55,7 @@ namespace Kochbuch
             layout.Children.Add(labelZutaten);
 
             Button btnZutatHinzufuegen = new Button();
-            btnZutatHinzufuegen.BorderColor = Color.Magenta;
+            btnZutatHinzufuegen.BorderColor = Color.Gray;
             btnZutatHinzufuegen.Text = "Zutat hinzufügen";
             btnZutatHinzufuegen.Clicked += BtnZutatHinzufuegen_Clicked;
             layout.Children.Add(btnZutatHinzufuegen);
