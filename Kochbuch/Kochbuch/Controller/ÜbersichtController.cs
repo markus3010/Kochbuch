@@ -18,6 +18,7 @@ namespace Kochbuch
             if(instance == null)
             {
                 instance = new ÜbersichtController();
+                
             }
             return instance;
         }

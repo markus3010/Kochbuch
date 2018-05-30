@@ -19,6 +19,8 @@ namespace Kochbuch
 
 		protected override void OnStart ()
 		{
+
+            ÜbersichtController.getInstance().SetzeInhaltStartSeite();
         }
 
 		protected override void OnSleep ()
