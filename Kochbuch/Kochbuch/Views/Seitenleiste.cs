@@ -108,6 +108,10 @@ namespace Kochbuch
             imageHaus.GestureRecognizers.Add(imageHausTapRecognizer);
             imageHausTapRecognizer.Tapped += ImageHausTapRecognizer_Tapped;
 
+            TapGestureRecognizer imageErdeTapRecoginzer = new TapGestureRecognizer();
+            imageErde.GestureRecognizers.Add(imageErdeTapRecoginzer);
+            imageErdeTapRecoginzer.Tapped += ImageErdeTapRecoginzer_Tapped;
+
             TapGestureRecognizer imageMenschTapRecognizer = new TapGestureRecognizer();
             imageMensch.GestureRecognizers.Add(imageMenschTapRecognizer);
             imageMenschTapRecognizer.Tapped += ImageMenschTapRecognizer_Tapped;
@@ -121,6 +125,11 @@ namespace Kochbuch
             layout.Children.Add(imageMensch);
             layout.Children.Add(imageKreuz);
             
+        }
+
+        private void ImageErdeTapRecoginzer_Tapped(object sender, EventArgs e)
+        {
+            ÜbersichtController.getInstance().SetzeInhaltOnlineRezepte();
         }
 
         private void ImageKreuzTapRecognizer_Tapped(object sender, EventArgs e)

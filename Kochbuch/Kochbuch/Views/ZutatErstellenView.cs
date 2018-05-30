@@ -14,59 +14,82 @@ namespace Kochbuch
         private Entry entryMenge;
         private Entry entryEinheit;
         private Entry entryZutat;
+
+        private StackLayout layoutLeft;
+        private StackLayout layoutMid;
+        private StackLayout layoutRight;
+
         public ZutatErstellenView()
         {
           
             layout = new StackLayout();
             Content = layout;
+
+
+            layoutLeft = new StackLayout();
+            layoutMid = new StackLayout();
+            layoutRight = new StackLayout();
+            layoutLeft.Orientation = StackOrientation.Vertical;
+            layoutMid.Orientation = StackOrientation.Vertical;
+            layoutRight.Orientation = StackOrientation.Vertical;
+            layout.Children.Add(layoutLeft);
+            layout.Children.Add(layoutMid);
+            layout.Children.Add(layoutRight);
+
             
             layout.Orientation = StackOrientation.Horizontal;
-            if(Device.RuntimePlatform == Device.Android)
-            {
-                layout.Orientation = StackOrientation.Horizontal;
-            }
             layout.HorizontalOptions = LayoutOptions.FillAndExpand;
             layout.Margin = new Thickness(20, 20, 20, 20);
 
             Label labelMenge = new Label();
             labelMenge.Text = "Menge";
-            layout.Children.Add(labelMenge);
-            labelMenge.HorizontalOptions = LayoutOptions.Start;
+            labelMenge.HorizontalOptions = LayoutOptions.StartAndExpand;
 
             entryMenge = new Entry();
             entryMenge.Placeholder = "Menge";
             entryMenge.PlaceholderColor = Color.LightGray;
-            layout.Children.Add(entryMenge);
             entryMenge.HorizontalOptions = LayoutOptions.FillAndExpand;
           
 
             Label labelEineheit = new Label();
             labelEineheit.Text = "Einheit (z.B. Gramm,  EL)";
-            layout.Children.Add(labelEineheit);
-            labelEineheit.HorizontalOptions = LayoutOptions.Start;
+            if(Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
+            {
+                labelEineheit.Text = "Einheit";
+            }
+            labelEineheit.HorizontalOptions = LayoutOptions.StartAndExpand;
 
             entryEinheit = new Entry();
             entryEinheit.Placeholder = "Einheit";
             entryEinheit.PlaceholderColor = Color.LightGray;
-            layout.Children.Add(entryEinheit);
             entryEinheit.HorizontalOptions = LayoutOptions.FillAndExpand;
 
 
             Label labelZutat = new Label();
             labelZutat.Text = "Zutat";
-            layout.Children.Add(labelZutat);
-            labelZutat.HorizontalOptions = LayoutOptions.Start;
+            labelZutat.HorizontalOptions = LayoutOptions.StartAndExpand;
 
             entryZutat = new Entry();
             entryZutat.Placeholder = "Zutat";
             entryZutat.PlaceholderColor = Color.LightGray;
-            layout.Children.Add(entryZutat);
             entryZutat.HorizontalOptions = LayoutOptions.FillAndExpand;
+
+            layoutLeft.Children.Add(labelMenge);
+            layoutLeft.Children.Add(entryMenge);
+            layoutMid.Children.Add(labelEineheit);
+            layoutMid.Children.Add(entryEinheit);
+            layoutRight.Children.Add(labelZutat);
+            layoutRight.Children.Add(entryZutat);
+
+            layoutLeft.HorizontalOptions = LayoutOptions.StartAndExpand;
+            layoutMid.HorizontalOptions = LayoutOptions.StartAndExpand;
+            layoutRight.HorizontalOptions = LayoutOptions.StartAndExpand;
+
 
             Image btnSpeichern = new Image();
             btnSpeichern.Scale = 2;
-            btnSpeichern.WidthRequest = 25;
-            btnSpeichern.HeightRequest = 25;
+            btnSpeichern.WidthRequest = 35;
+            btnSpeichern.HeightRequest = 35;
             btnSpeichern.Source = (FileImageSource) ImageSource.FromFile("Speichern.png");
             btnSpeichern.HorizontalOptions = LayoutOptions.End;
             TapGestureRecognizer recognizerSpeichern = new TapGestureRecognizer();

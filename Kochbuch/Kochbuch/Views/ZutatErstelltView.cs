@@ -42,9 +42,9 @@ namespace Kochbuch
             TapGestureRecognizer recognizerBearbeiten = new TapGestureRecognizer();
             btnBearbeiten.GestureRecognizers.Add(recognizerBearbeiten);
             recognizerBearbeiten.Tapped += BtnBearbeiten_Clicked;
-            btnBearbeiten.WidthRequest = 25;
+            btnBearbeiten.WidthRequest = 35;
 
-            btnBearbeiten.HeightRequest = 25;
+            btnBearbeiten.HeightRequest = 35;
             layout.Children.Add(btnBearbeiten);
 
             this.Content = layout;

@@ -74,6 +74,8 @@ namespace Kochbuch
                 }
             }
             await LokalDb.GetInstance().SaveRezeptAsync(rezept);
+            bool response = await OnlineDb.getInstance().SaveRezeptAsync(rezept);
+            ÜbersichtPage.ShowAlert("ALEERT", response.ToString());
             await ÜbersichtController.getInstance().SetzeInhaltEigeneRezepte();
             RezeptErstellenView.getInstance().DeleteAll();
         }

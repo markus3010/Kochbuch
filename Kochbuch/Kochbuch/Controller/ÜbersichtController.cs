@@ -60,5 +60,11 @@ namespace Kochbuch
                 currentView = view;
             }
         }
+
+        public async void SetzeInhaltOnlineRezepte()
+        {
+            await OnlineRezepteController.getInstance().SetRezepte();
+            SetzeInhalt(EigeneRezepteView.getInstance());
+        }
     }
 }
