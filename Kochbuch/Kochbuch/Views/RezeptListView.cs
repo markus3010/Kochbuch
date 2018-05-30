@@ -49,7 +49,7 @@ namespace Kochbuch
                 });
                 anzahlKochloeffel--;
             }
-            while (anzahlKochloeffel > 0);
+            while (anzahlKochloeffel > -1);
             TapGestureRecognizer layoutTapRecognizer = new TapGestureRecognizer();
             layout.GestureRecognizers.Add(layoutTapRecognizer);
             layoutTapRecognizer.Tapped += LayoutTapRecognizer_Tapped;
