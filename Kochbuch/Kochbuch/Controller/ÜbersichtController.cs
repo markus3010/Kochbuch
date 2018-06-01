@@ -37,12 +37,22 @@ namespace Kochbuch
             await EigeneRezepteController.getInstance().SetRezepte();
             SetzeInhalt(EigeneRezepteView.getInstance());
         }
-        public async Task SetzeInhaltRezept(int rezeptID)
+        public async Task SetzeInhaltEigenesRezept(int rezeptID)
         {
             RezeptModel rezept = await LokalDb.GetInstance().GetRezeptAsync(rezeptID);
             RezeptView rezeptView = new RezeptView(rezept);
             rezeptView.ZeigeZurückButton(true);
             SetzeInhalt(rezeptView);
+        }
+        public void SetzeInhaltOnlineRezept(int rezeptID)
+        {
+            RezeptModel rezeptFromList = OnlineRezepteController.getInstance().GetRezeptFromList(rezeptID);
+            if (rezeptFromList != null)
+            {
+                RezeptView rezeptView = new RezeptView(rezeptFromList);
+                rezeptView.ZeigeZurückButton(true);
+                SetzeInhalt(rezeptView);
+            }
         }
         public void SetzeInhaltLezter()
         {
@@ -68,6 +78,17 @@ namespace Kochbuch
             SetzeInhalt(OnlineRezepteView.getInstance());
             await OnlineRezepteController.getInstance().SetRezepte();
             OnlineRezepteController.getInstance().Load(false);
+        }
+        public Type GetCurrentContentType()
+        {
+            if(currentView != null)
+            {
+                return currentView.GetType();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

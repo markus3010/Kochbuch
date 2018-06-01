@@ -57,7 +57,14 @@ namespace Kochbuch
 
         private async void LayoutTapRecognizer_Tapped(object sender, EventArgs e)
         {
-            await ÜbersichtController.getInstance().SetzeInhaltRezept(rezept.ID);
+            Type currentType = ÜbersichtController.getInstance().GetCurrentContentType();
+            if(typeof(EigeneRezepteView) == currentType)
+            {
+                await ÜbersichtController.getInstance().SetzeInhaltEigenesRezept(rezept.ID);
+            }else if(typeof(OnlineRezepteView) == currentType)
+            {
+                ÜbersichtController.getInstance().SetzeInhaltOnlineRezept(rezept.ID);
+            }
         }
     }
 }

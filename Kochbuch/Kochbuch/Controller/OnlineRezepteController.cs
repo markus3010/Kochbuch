@@ -8,6 +8,7 @@ namespace Kochbuch
     class OnlineRezepteController
     {
         private static OnlineRezepteController instance;
+        List<RezeptModel> rezepte;
         private OnlineRezepteController()
         {
 
@@ -23,13 +24,22 @@ namespace Kochbuch
         public async Task SetRezepte()
         {
             var db = OnlineDb.getInstance();
-            List<RezeptModel> rezepte = new List<RezeptModel>();
+            rezepte = new List<RezeptModel>();
             rezepte = await db.GetRezeptModelsAsync();
             OnlineRezepteView.getInstance().SetRezepte(rezepte);
         }
         public void Load(bool show)
         {
             OnlineRezepteView.getInstance().ShowLoadingIcon(show);
+        }
+        public RezeptModel GetRezeptFromList(int ID)
+        {
+            if(rezepte == null)
+            {
+                return null;
+            }
+            RezeptModel rezept = rezepte.Find(x => x.ID == ID);
+            return rezept;
         }
     }
 }

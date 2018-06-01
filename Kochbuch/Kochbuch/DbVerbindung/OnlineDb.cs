@@ -38,14 +38,12 @@ namespace Kochbuch
         public async Task<bool> SaveRezeptAsync(RezeptModel rezept)
         {
             client = new HttpClient();
-            
+
             var response = await client.PostAsync("http://kochbuchapi20180530122617.azurewebsites.net/api/Rezept", new StringContent(JsonConvert.SerializeObject(rezept), Encoding.UTF8, "application/json"));
-            
             if (response.IsSuccessStatusCode)
             {
                 return true;
             }
-            ÜbersichtPage.ShowAlert("ALERT", response.StatusCode.ToString());
             return false;
         }
 
