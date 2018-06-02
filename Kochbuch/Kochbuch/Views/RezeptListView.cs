@@ -9,62 +9,90 @@ namespace Kochbuch
 {
 	public class RezeptListView : ContentView
 	{
-        RezeptModel rezept;
         StackLayout layout;
-        public RezeptListView(RezeptModel rezept)
+        ScrollView scroll;
+
+        StackLayout layoutTitel;
+        StackLayout layoutAutor;
+        StackLayout layoutSchwierigkeit;
+
+        public RezeptListView()
         {
-            this.rezept = rezept;
-            
+            scroll = new ScrollView();
+            scroll.VerticalOptions = LayoutOptions.Start;
+            scroll.HorizontalOptions = LayoutOptions.FillAndExpand;
+            scroll.Orientation = ScrollOrientation.Vertical;
+
             layout = new StackLayout();
             layout.VerticalOptions = LayoutOptions.Start;
             layout.HorizontalOptions = LayoutOptions.FillAndExpand;
             layout.Orientation = StackOrientation.Horizontal;
 
-            Content = layout;
-            layout.Children.Add(new Label
-            {
-                Text = rezept.Titel,
-                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
-                FontAttributes = FontAttributes.Bold,
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-            });
-            layout.Children.Add(
-                new Label
-                {
-                    Text = "von " + rezept.Autor,
-                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                    FontAttributes = FontAttributes.Italic,
-                    HorizontalOptions = LayoutOptions.Center,
-                    VerticalOptions = LayoutOptions.Center
-                });
-            int anzahlKochloeffel = (int) rezept.Schwierigkeit;
-            do
-            {
-                layout.Children.Add(new Image
-                {
-                    HeightRequest = 50,
-                    WidthRequest = 50,
-                    Source = ImageSource.FromFile("Kochloeffel.png"),
-                    HorizontalOptions = LayoutOptions.End,
-                });
-                anzahlKochloeffel--;
-            }
-            while (anzahlKochloeffel > -1);
-            TapGestureRecognizer layoutTapRecognizer = new TapGestureRecognizer();
-            layout.GestureRecognizers.Add(layoutTapRecognizer);
-            layoutTapRecognizer.Tapped += LayoutTapRecognizer_Tapped;
+            this.Content = scroll;
+            scroll.Content = layout;
+
+            layoutTitel = new StackLayout();
+            layoutAutor = new StackLayout();
+            layoutSchwierigkeit = new StackLayout();
+
+            layoutTitel.HorizontalOptions = LayoutOptions.StartAndExpand;
+            layoutAutor.HorizontalOptions = LayoutOptions.StartAndExpand;
+            layoutSchwierigkeit.HorizontalOptions = LayoutOptions.StartAndExpand;
+
+            layout.Children.Add(layoutTitel);
+            layout.Children.Add(layoutAutor);
+            layout.Children.Add(layoutSchwierigkeit);
         }
 
-        private async void LayoutTapRecognizer_Tapped(object sender, EventArgs e)
+        public void RezeptHinzufuegen(int ID, string titel, string autor, int schwierigkeit)
         {
-            Type currentType = ÜbersichtController.getInstance().GetCurrentContentType();
-            if(typeof(EigeneRezepteView) == currentType)
+            TapGestureRecognizer rezeptGestureRecoginizer = new TapGestureRecognizer();
+            rezeptGestureRecoginizer.Tapped += (sender, EventArgs) =>
             {
-                await ÜbersichtController.getInstance().SetzeInhaltEigenesRezept(rezept.ID);
-            }else if(typeof(OnlineRezepteView) == currentType)
+                if(ÜbersichtController.getInstance().GetCurrentContentType() == typeof(OnlineRezepteView))
+                {
+                    OnlineRezepteController.getInstance().RezeptAusgewählt(ID);
+                }
+                else if(ÜbersichtController.getInstance().GetCurrentContentType() == typeof(EigeneRezepteView))
+                {
+                    EigeneRezepteController.getInstance().RezeptAusgewählt(ID);
+                }
+            };
+
+            Label labelTitel = new Label();
+            labelTitel.Text = titel;
+            labelTitel.FontAttributes = FontAttributes.Bold;
+            labelTitel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
+            labelTitel.HeightRequest = 50;
+            labelTitel.HorizontalOptions = LayoutOptions.Center;
+            labelTitel.GestureRecognizers.Add(rezeptGestureRecoginizer);
+            layoutTitel.Children.Add(labelTitel);
+
+            Label labelAutor = new Label();
+            labelAutor.Text = "von " + autor;
+            labelAutor.HeightRequest = 50;
+            labelAutor.HorizontalOptions = LayoutOptions.Center;
+            labelAutor.GestureRecognizers.Add(rezeptGestureRecoginizer);
+            layoutAutor.Children.Add(labelAutor);
+
+            StackLayout layoutLoeffel = new StackLayout();
+            layoutLoeffel.Orientation = StackOrientation.Horizontal;
+            layoutLoeffel.GestureRecognizers.Add(rezeptGestureRecoginizer);
+            while (schwierigkeit > -1)
             {
-                ÜbersichtController.getInstance().SetzeInhaltOnlineRezept(rezept.ID);
+                Image imageLoeffel = new Image();
+                imageLoeffel.Source = ImageSource.FromFile("Kochloeffel.png");
+                imageLoeffel.HeightRequest = 50;
+                layoutLoeffel.Children.Add(imageLoeffel);
+                schwierigkeit--;
             }
+            layoutSchwierigkeit.Children.Add(layoutLoeffel);
+        }
+        public void RezepteLoeschen()
+        {
+            layoutTitel.Children.Clear();
+            layoutAutor.Children.Clear();
+            layoutSchwierigkeit.Children.Clear();
         }
     }
 }

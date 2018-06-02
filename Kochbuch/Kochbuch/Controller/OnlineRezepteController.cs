@@ -23,10 +23,13 @@ namespace Kochbuch
         }
         public async Task SetRezepte()
         {
+            Load(true);
             var db = OnlineDb.getInstance();
             rezepte = new List<RezeptModel>();
             rezepte = await db.GetRezeptModelsAsync();
+            Load(false);
             OnlineRezepteView.getInstance().SetRezepte(rezepte);
+            
         }
         public void Load(bool show)
         {
@@ -40,6 +43,31 @@ namespace Kochbuch
             }
             RezeptModel rezept = rezepte.Find(x => x.ID == ID);
             return rezept;
+        }
+
+        public async Task Refresh()
+        {
+            OnlineRezepteView.getInstance().RezepteLoeschen();
+            await SetRezepte();
+        }
+
+        public static bool HasInstance()
+        {
+            if(instance == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void RezeptAusgewählt(int ID)
+        {
+            RezeptModel rezept = GetRezeptFromList(ID);
+            if(rezept != null)
+            {
+
+                ÜbersichtController.getInstance().SetzeInhaltRezept(rezept);
+            }
         }
     }
 }

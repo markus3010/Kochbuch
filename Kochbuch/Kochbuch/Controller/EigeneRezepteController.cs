@@ -8,6 +8,7 @@ namespace Kochbuch
     class EigeneRezepteController
     {
         private static EigeneRezepteController instance;
+        private List<RezeptModel> rezepte;
         private EigeneRezepteController()
         {
 
@@ -23,9 +24,34 @@ namespace Kochbuch
         public async Task SetRezepte()
         {
             var db = LokalDb.GetInstance();
-            List<RezeptModel> rezepte = new List<RezeptModel>();
+            rezepte = new List<RezeptModel>();
             rezepte = await db.GetRezeptModelsAsync();
             EigeneRezepteView.getInstance().SetRezepte(rezepte);
+        }
+
+        public async Task Refresh()
+        {
+            EigeneRezepteView.getInstance().RezepteLoeschen();
+            await SetRezepte();
+        }
+
+        public void RezeptAusgewählt(int ID)
+        {
+            RezeptModel rezept = GetRezeptFromList(ID);
+            if (rezept != null)
+            {
+
+                ÜbersichtController.getInstance().SetzeInhaltRezept(rezept);
+            }
+        }
+        public RezeptModel GetRezeptFromList(int ID)
+        {
+            if (rezepte == null)
+            {
+                return null;
+            }
+            RezeptModel rezept = rezepte.Find(x => x.ID == ID);
+            return rezept;
         }
     }
 }

@@ -129,6 +129,7 @@
     <Content Include="Erde.png" />
     <Content Include="Haus.png" />
     <Content Include="Loeschen.png" />
+    <Content Include="refresh.png" />
     <Content Include="Save.png" />
     <Content Include="Kochloeffel.png" />
     <Content Include="Kreuz.png" />
