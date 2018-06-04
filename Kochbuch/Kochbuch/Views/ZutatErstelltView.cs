@@ -73,18 +73,14 @@ namespace Kochbuch
         public void SetMenge(int menge)
         {
             labelMenge.Text = menge.ToString();
-            //ÜbersichtPage.ShowAlert("ALERT", menge.ToString());
         }
         public void SetEinheit(string einheit)
         {
             labelEinheit.Text = einheit;
-
-           // ÜbersichtPage.ShowAlert("ALERT",einheit);
         }
         public void SetZutat(string zutat)
         {
             labelZutat.Text = zutat;
-            //ÜbersichtPage.ShowAlert("ALERT", zutat);
         }
         private void BtnBearbeiten_Clicked(object sender, EventArgs e)
         {

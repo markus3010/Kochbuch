@@ -79,7 +79,7 @@ namespace Kochbuch
             btnSpeichern.Clicked += BtnSpeichern_Clicked;
         }
 
-        internal void DeleteAll()
+        internal void DatenLöschen()
         {
             instance = new RezeptErstellenView();
         }

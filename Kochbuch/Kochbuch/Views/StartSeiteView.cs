@@ -24,6 +24,9 @@ namespace Kochbuch
             layout.HorizontalOptions = LayoutOptions.FillAndExpand;
 
 
+
+
+
             Image logo = new Image();
             logo.Source = ImageSource.FromFile("Logo.png");
 
