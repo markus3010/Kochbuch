@@ -41,7 +41,7 @@ namespace Kochbuch
             RezeptErstellenView.getInstance().ViewEntfernen(erstellenView);
         }
 
-        public async Task Speichern(RezeptErstellenView rezeptErstellenView)
+        public async Task Speichern(RezeptErstellenView rezeptErstellenView, bool onlineSpeichern)
         {
             RezeptModel rezept = new RezeptModel();
             rezept.Titel = rezeptErstellenView.GetTitel();
@@ -74,8 +74,12 @@ namespace Kochbuch
                 }
             }
             await LokalDb.GetInstance().SaveRezeptAsync(rezept);
-            bool response = await OnlineDb.getInstance().SaveRezeptAsync(rezept);
-            ÜbersichtPage.ShowAlert("ALEERT", response.ToString());
+            if(onlineSpeichern == true)
+            {
+                bool response = await OnlineDb.getInstance().SaveRezeptAsync(rezept);
+                await OnlineRezepteController.getInstance().Refresh();
+            }
+            await EigeneRezepteController.getInstance().Refresh();
             await ÜbersichtController.getInstance().SetzeInhaltEigeneRezepte();
             RezeptErstellenView.getInstance().DatenLöschen();
         }

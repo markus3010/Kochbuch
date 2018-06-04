@@ -51,6 +51,12 @@ namespace Kochbuch
         {
             throw new NotImplementedException();
         }
+
+        public async Task DeleteRezeptAsync(string titel)
+        {
+            client = new HttpClient();
+            var response  = await client.DeleteAsync("http://kochbuchapi20180530122617.azurewebsites.net/api/Rezept/"+titel);
+        }
         public static OnlineDb getInstance()
         {
             if(instance == null)

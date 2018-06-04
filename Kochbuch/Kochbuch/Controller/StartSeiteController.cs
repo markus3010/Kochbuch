@@ -33,7 +33,7 @@ namespace Kochbuch
                 Random random = new Random();
                 int auswahl = random.Next(anzahl);
                 StartSeiteView startSeite = StartSeiteView.getInstance();
-                startSeite.SetzeRezeptView(new RezeptView(rezepte[auswahl]));
+                startSeite.SetzeRezeptView(RezeptController.getInstance().GetRezeptView(rezepte[auswahl],false));
             }
         }
     }

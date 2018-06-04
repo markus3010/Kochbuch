@@ -66,7 +66,7 @@ namespace Kochbuch
             if(rezept != null)
             {
 
-                ÜbersichtController.getInstance().SetzeInhaltRezept(rezept);
+                ÜbersichtController.getInstance().SetzeInhaltRezept(rezept, true);
             }
         }
     }

@@ -64,14 +64,14 @@ namespace Kochbuch
             labelTitel.FontAttributes = FontAttributes.Bold;
             labelTitel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
             labelTitel.HeightRequest = 50;
-            labelTitel.HorizontalOptions = LayoutOptions.Center;
+            labelTitel.VerticalOptions = LayoutOptions.Center;
             labelTitel.GestureRecognizers.Add(rezeptGestureRecoginizer);
             layoutTitel.Children.Add(labelTitel);
 
             Label labelAutor = new Label();
             labelAutor.Text = "von " + autor;
             labelAutor.HeightRequest = 50;
-            labelAutor.HorizontalOptions = LayoutOptions.Center;
+            labelAutor.VerticalOptions = LayoutOptions.Center;
             labelAutor.GestureRecognizers.Add(rezeptGestureRecoginizer);
             layoutAutor.Children.Add(labelAutor);
 

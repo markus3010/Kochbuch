@@ -37,9 +37,9 @@ namespace Kochbuch
             await EigeneRezepteController.getInstance().Refresh();
             SetzeInhalt(EigeneRezepteView.getInstance());
         }
-        internal void SetzeInhaltRezept(RezeptModel rezept)
+        public void SetzeInhaltRezept(RezeptModel rezept, bool onlineRezept)
         {
-            SetzeInhalt(new RezeptView(rezept));
+            SetzeInhalt(RezeptController.getInstance().GetRezeptView(rezept, !onlineRezept));
         }
         public void SetzeInhaltLezter()
         {

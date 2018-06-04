@@ -101,7 +101,7 @@ namespace Kochbuch
 
         private async void BtnSpeichern_Clicked(object sender, EventArgs e)
         {
-            await RezeptErstellenController.getInstance().Speichern(instance);
+            await RezeptErstellenController.getInstance().Speichern(instance, switchOnline.IsToggled);
         }
 
         private void BtnZutatHinzufuegen_Clicked(object sender, EventArgs e)
