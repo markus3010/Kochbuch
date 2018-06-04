@@ -85,17 +85,31 @@ namespace Kochbuch
             layoutMid.HorizontalOptions = LayoutOptions.StartAndExpand;
             layoutRight.HorizontalOptions = LayoutOptions.StartAndExpand;
 
+            Image imageLöschen = new Image();
+            imageLöschen.WidthRequest = 35;
+            imageLöschen.HeightRequest = 35;
+            imageLöschen.Source = (FileImageSource)ImageSource.FromFile("Loeschen.png");
+            imageLöschen.HorizontalOptions = LayoutOptions.End;
+            TapGestureRecognizer recognizerLöschen = new TapGestureRecognizer();
+            imageLöschen.GestureRecognizers.Add(recognizerLöschen);
+            recognizerLöschen.Tapped += RecognizerLöschen_Tapped;
+            layout.Children.Add(imageLöschen);
 
-            Image btnSpeichern = new Image();
-            //btnSpeichern.Scale = 2;
-            btnSpeichern.WidthRequest = 35;
-            btnSpeichern.HeightRequest = 35;
-            btnSpeichern.Source = (FileImageSource) ImageSource.FromFile("Speichern.png");
-            btnSpeichern.HorizontalOptions = LayoutOptions.End;
+
+            Image imageSpeichern = new Image();
+            imageSpeichern.WidthRequest = 35;
+            imageSpeichern.HeightRequest = 35;
+            imageSpeichern.Source = (FileImageSource) ImageSource.FromFile("Speichern.png");
+            imageSpeichern.HorizontalOptions = LayoutOptions.End;
             TapGestureRecognizer recognizerSpeichern = new TapGestureRecognizer();
-            btnSpeichern.GestureRecognizers.Add(recognizerSpeichern);
+            imageSpeichern.GestureRecognizers.Add(recognizerSpeichern);
             recognizerSpeichern.Tapped += RecognizerSpeichern_Tapped;
-            layout.Children.Add(btnSpeichern);
+            layout.Children.Add(imageSpeichern);
+        }
+
+        private void RecognizerLöschen_Tapped(object sender, EventArgs e)
+        {
+            RezeptErstellenView.getInstance().ZutatLöschen(this);
         }
 
         private void RecognizerSpeichern_Tapped(object sender, EventArgs e)

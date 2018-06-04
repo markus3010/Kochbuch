@@ -17,6 +17,7 @@ namespace Kochbuch
         private OnlineRezepteView()
         {
             layout = new StackLayout();
+            layout.Padding = new Thickness(10, 10);
             rezeptListView = new RezeptListView();
 
             this.Content = layout;
@@ -29,6 +30,7 @@ namespace Kochbuch
             labelÜberschrift.Text = "Online Rezepte";
             labelÜberschrift.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
             labelÜberschrift.HorizontalOptions = LayoutOptions.StartAndExpand;
+            labelÜberschrift.VerticalOptions = LayoutOptions.Center;
             layoutLeiste.Children.Add(labelÜberschrift);
 
             Image imageRefresh = new Image();

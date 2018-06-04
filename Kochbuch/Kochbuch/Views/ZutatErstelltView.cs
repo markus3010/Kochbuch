@@ -36,6 +36,16 @@ namespace Kochbuch
             layout.Children.Add(labelEinheit);
             layout.Children.Add(labelZutat);
 
+            Image imageLöschen = new Image();
+            imageLöschen.WidthRequest = 35;
+            imageLöschen.HeightRequest = 35;
+            imageLöschen.Source = (FileImageSource)ImageSource.FromFile("Loeschen.png");
+            imageLöschen.HorizontalOptions = LayoutOptions.End;
+            TapGestureRecognizer recognizerLöschen = new TapGestureRecognizer();
+            imageLöschen.GestureRecognizers.Add(recognizerLöschen);
+            recognizerLöschen.Tapped += RecognizerLöschen_Tapped;
+            layout.Children.Add(imageLöschen);
+
             Image  btnBearbeiten = new Image();
             btnBearbeiten.Source = (FileImageSource)ImageSource.FromFile("Bearbeiten.png");
             btnBearbeiten.HorizontalOptions = LayoutOptions.End;
@@ -43,11 +53,15 @@ namespace Kochbuch
             btnBearbeiten.GestureRecognizers.Add(recognizerBearbeiten);
             recognizerBearbeiten.Tapped += BtnBearbeiten_Clicked;
             btnBearbeiten.WidthRequest = 35;
-
             btnBearbeiten.HeightRequest = 35;
             layout.Children.Add(btnBearbeiten);
 
             this.Content = layout;
+        }
+
+        private void RecognizerLöschen_Tapped(object sender, EventArgs e)
+        {
+            RezeptErstellenView.getInstance().ZutatLöschen(this);
         }
 
         public string GetArt()

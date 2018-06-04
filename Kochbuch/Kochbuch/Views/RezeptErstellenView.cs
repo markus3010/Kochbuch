@@ -16,13 +16,15 @@ namespace Kochbuch
         Entry entryTitel;
         Picker pickerSchwierigkeit;
         Editor editorBeschreibung;
+        Switch switchOnline;
+
 		private RezeptErstellenView ()
 		{
             scroll = new ScrollView();
             Content = scroll;
             layout = new StackLayout();
             scroll.Content = layout;
-            layout.Margin = new Thickness(20, 20);
+            layout.Margin = new Thickness(10, 10);
             scroll.HorizontalOptions = LayoutOptions.StartAndExpand;
             layout.HorizontalOptions = LayoutOptions.StartAndExpand;
 
@@ -72,6 +74,19 @@ namespace Kochbuch
             editorBeschreibung.HeightRequest = 500;
             editorBeschreibung.WidthRequest = 5000;
             layout.Children.Add(editorBeschreibung);
+
+            StackLayout layoutOnline = new StackLayout();
+            layoutOnline.Orientation = StackOrientation.Horizontal;
+            Label labelOnline = new Label();
+            labelOnline.VerticalOptions = LayoutOptions.Center;
+            labelOnline.HorizontalOptions = LayoutOptions.StartAndExpand;
+            labelOnline.Text = "Online Veröffentlichen";
+            layoutOnline.Children.Add(labelOnline);
+            switchOnline = new Switch();
+            switchOnline.VerticalOptions = LayoutOptions.Center;
+            switchOnline.HorizontalOptions = LayoutOptions.EndAndExpand;
+            layoutOnline.Children.Add(switchOnline);
+            layout.Children.Add(layoutOnline);
 
             Button btnSpeichern = new Button();
             btnSpeichern.Text = "Speichern";
@@ -139,6 +154,12 @@ namespace Kochbuch
                     return RezeptModel.schwierigkeit.Schwer;
             }
         }
+
+        public void ZutatLöschen(View view)
+        {
+            layout.Children.Remove(view);
+        }
+
         public string GetBeschreibung()
         {
             return editorBeschreibung.Text;

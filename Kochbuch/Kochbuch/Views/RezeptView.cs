@@ -21,6 +21,7 @@ namespace Kochbuch
             layout = new StackLayout();
             layout.VerticalOptions = LayoutOptions.StartAndExpand;
             layout.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            layout.Padding = new Thickness(10, 10);
             scroll.Content = layout;
 
             Image imageLöschen = new Image

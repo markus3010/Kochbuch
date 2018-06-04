@@ -40,7 +40,7 @@ namespace Kochbuch
             tagLabel.Text = "Rezept des Tages:";
             tagLabel.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
             tagLabel.HorizontalOptions = LayoutOptions.Start;
-            tagLabel.Margin = new Thickness(20, 20, 20, 20);
+            tagLabel.Margin = new Thickness(10,10);
             tagLabel.WidthRequest = 5000;
 
             layout.Children.Add(logo);
@@ -63,6 +63,7 @@ namespace Kochbuch
             {
                 layout.Children.RemoveAt(3);
             }
+            rezept.Padding = new Thickness(10, 10);
             layout.Children.Add(rezept);
         }
     }
