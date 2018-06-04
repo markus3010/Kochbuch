@@ -9,10 +9,7 @@ namespace Kochbuch
     class StartSeiteController
     {
         private static StartSeiteController instance;
-        private StartSeiteController()
-        {
 
-        }
         public static StartSeiteController getInstance()
         {
             if(instance == null)

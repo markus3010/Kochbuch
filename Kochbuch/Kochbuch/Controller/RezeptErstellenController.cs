@@ -8,13 +8,8 @@ namespace Kochbuch
 {
     class RezeptErstellenController
     {
-        private RezeptModel rezept;
-        private List<ZutatModel> zutaten;
         private static RezeptErstellenController instance;
-        private RezeptErstellenController()
-        {
-
-        }
+        
         public static RezeptErstellenController getInstance()
         {
             if(instance == null)

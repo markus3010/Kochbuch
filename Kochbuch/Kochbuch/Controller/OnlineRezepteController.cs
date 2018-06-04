@@ -9,10 +9,7 @@ namespace Kochbuch
     {
         private static OnlineRezepteController instance;
         List<RezeptModel> rezepte;
-        private OnlineRezepteController()
-        {
 
-        }
         public static OnlineRezepteController getInstance()
         {
             if (instance == null)
