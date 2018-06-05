@@ -12,15 +12,6 @@ namespace Kochbuch
     {
         private static OnlineDb instance;
         private HttpClient client;
-        public Task<RezeptModel> GetRezeptAsync(int ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<RezeptModel> GetRezeptAsync(string Titel)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<List<RezeptModel>> GetRezeptModelsAsync()
         {
